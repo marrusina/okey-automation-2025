@@ -29,8 +29,9 @@ public class FirstTest
                 //"apks/org.wikipedia.apk");
         capabilities.setCapability("appPackage","ru.reksoft.okey");
         capabilities.setCapability("appActivity",".ui.activity.MainActivity");
-        capabilities.setCapability("app","C:/Users/rusina/Desktop/JavaAppiumAutomation/JavaAppiumAutomation/" +
-                "apks/app-debug.apk");
+        //capabilities.setCapability("app","C:/Users/rusina/Desktop/JavaAppiumAutomation/JavaAppiumAutomation/" +
+               // "apks/app-debug.apk");
+        capabilities.setCapability("app","C:/Users/rusina/Desktop/app-debug.apk");
 
         driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
     }
@@ -69,7 +70,7 @@ public class FirstTest
                 "no field Search", 10);
         WebElement elementSearchSendKeys = waitForElementByIdAndSendKeys(
                 "ru.reksoft.okey:id/search_field",
-                "cannot find search field and send keys", "хлеб", 10);
+                "хлеб", "cannot find search field and send keys", 10);
         this.sendEnter();
         waitForElementPresentByXpath(
                 "//*[@resource-id='ru.reksoft.okey:id/items']//*[@text='Хлеб Английский диетический в нар.400г Каравай']",
@@ -117,7 +118,7 @@ public class FirstTest
 
     private WebElement waitForElementPresentByIdAndClick(String id, String error, long timeOutInSeconds)
     {
-        WebElement element = waitForElementPresentByIdAndClick(id, error, timeOutInSeconds);
+        WebElement element = waitForElementPresentById(id, error, timeOutInSeconds);
         element.click();
         return element;
     }
