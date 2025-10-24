@@ -31,7 +31,7 @@ public class FirstTest
         capabilities.setCapability("appActivity",".ui.activity.MainActivity");
         //capabilities.setCapability("app","C:/Users/rusina/Desktop/JavaAppiumAutomation/JavaAppiumAutomation/" +
                // "apks/app-debug.apk");
-        capabilities.setCapability("app","C:/Users/rusina/Desktop/app-debug.apk");
+        capabilities.setCapability("app","C:/Users/marina.rusina/Desktop/app-debug.apk");
 
         driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
     }
@@ -44,37 +44,45 @@ public class FirstTest
     @Test
     public void firstTest()
     {
-        WebElement elementPermission = waitForElementPresentByIdAndClick(
-                "com.android.permissioncontroller:id/permission_deny_button",
+        WebElement elementPermission = waitForElementPresentAndClick(
+                By.id("com.android.permissioncontroller:id/permission_deny_button"),
                 "cannot find permission deny button", 10);
-        WebElement elementLocationCancel = waitForElementPresentByXpathAndClick(
-                "//*[contains(@text,'CANCEL')]",
+        WebElement elementLocationCancel = waitForElementPresentAndClick(
+                By.xpath("//*[contains(@text,'CANCEL')]"),
                 "no cancel button",10);
-        WebElement elementChooseCity = waitForElementPresentByXpathAndClick(
-                "//android.widget.TextView[@text=\"Санкт-Петербург\"]",
+        WebElement elementChooseCity = waitForElementPresentAndClick(
+                By.xpath("//android.widget.TextView[@text=\"Санкт-Петербург\"]"),
                 "cannot find city button", 10);
-        WebElement elementNextButton = waitForElementPresentByIdAndClick(
-                "ru.reksoft.okey:id/next",
+        WebElement elementNextButton = waitForElementPresentAndClick(
+                By.id("ru.reksoft.okey:id/next"),
                 "Cannot find button Next", 10);
-        WebElement elementSkip = waitForElementPresentByIdAndClick(
-                "ru.reksoft.okey:id/skip",
+        WebElement elementSkip = waitForElementPresentAndClick(
+                By.id("ru.reksoft.okey:id/skip"),
                 "Cannot find button SKIP", 10);
-        WebElement elementNotificationAllow = waitForElementPresentByXpathAndClick(
-                "//*[contains(@text,'ALLOW')]",
+        WebElement elementNotificationAllow = waitForElementPresentAndClick(
+                By.xpath("//*[contains(@text,'ALLOW')]"),
                 "Cannot find button Allow notification", 10);
 
-        WebElement elementCatalog = waitForElementPresentByXpathAndClick(
-                "(//android.widget.ImageView[@resource-id=\"ru.reksoft.okey:id/navigation_bar_item_icon_view\"])[2]",
+        WebElement elementCatalog = waitForElementPresentAndClick(
+                By.xpath("(//android.widget.ImageView[@resource-id=\"ru.reksoft.okey:id/navigation_bar_item_icon_view\"])[2]"),
                 "cannot find catalog button", 10);
-        WebElement elementSearch = waitForElementPresentByXpathAndClick("//*[contains(@text,'Search')]",
+        WebElement elementSearch = waitForElementPresentAndClick(
+                By.id("//*[contains(@text,'Search')]"),
                 "no field Search", 10);
-        WebElement elementSearchSendKeys = waitForElementByIdAndSendKeys(
-                "ru.reksoft.okey:id/search_field",
+        WebElement elementSearchSendKeys = waitForElementAndSendKeys(
+                By.id("ru.reksoft.okey:id/search_field"),
                 "хлеб", "cannot find search field and send keys", 10);
         this.sendEnter();
-        waitForElementPresentByXpath(
-                "//*[@resource-id='ru.reksoft.okey:id/items']//*[@text='Хлеб Английский диетический в нар.400г Каравай']",
+        waitForElementPresent(
+                By.xpath("//*[@resource-id='ru.reksoft.okey:id/items']//*[@text='Хлеб Английский диетический в нар.400г Каравай']"),
         "Cannot find bread", 50);
+        WebElement elementBack = waitForElementPresentAndClick(
+                By.xpath("//android.widget.ImageButton[@content-desc=\"Navigate up\"]"),
+                "cannot find back and click",
+                10);
+        waitForElementNotPresent(
+                By.xpath("//*[@resource-id='ru.reksoft.okey:id/items']//*[@text='Хлеб Английский диетический в нар.400г Каравай']"),
+                "Still seen bread", 30);
     }
 
     public void sendEnter()
@@ -82,50 +90,37 @@ public class FirstTest
         driver.executeScript("mobile:performEditorAction", ImmutableMap.of("action","done"));
     }
 
-
-    private WebElement waitForElementPresentByXpath(String xpath, String error, long timeOutInSeconds)
+    private Boolean waitForElementNotPresent(By by, String error, long timeOutInSeconds)
     {
         WebDriverWait wait = new WebDriverWait(driver,timeOutInSeconds);
         wait.withMessage(error + "\n");
-        By by = By.xpath(xpath);
+        return wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
+    }
+
+
+    private WebElement waitForElementPresent(By by, String error, long timeOutInSeconds)
+    {
+        WebDriverWait wait = new WebDriverWait(driver,timeOutInSeconds);
+        wait.withMessage(error + "\n");
         return wait.until(ExpectedConditions.presenceOfElementLocated(by));
     }
 
-    private WebElement waitForElementPresentByXpath(String xpath, String error)
+    private WebElement waitForElementPresent(By by, String error)
     {
-        return waitForElementPresentByXpath(xpath, error, 5);
+        return waitForElementPresent(by, error, 5);
     }
 
-    private WebElement waitForElementPresentByXpathAndClick(String xpath, String error, long timeOutInSeconds)
+    private WebElement waitForElementPresentAndClick(By by, String error, long timeOutInSeconds)
     {
-        WebElement element = waitForElementPresentByXpath(xpath, error, timeOutInSeconds);
+        WebElement element = waitForElementPresent(by, error, timeOutInSeconds);
         element.click();
         return element;
     }
 
-    private WebElement waitForElementPresentById(String id, String error, long timeOutInSeconds)
-    {
-        WebDriverWait wait = new WebDriverWait(driver,timeOutInSeconds);
-        wait.withMessage(error + "\n");
-        By by = By.id(id);
-        return wait.until(ExpectedConditions.presenceOfElementLocated(by));
-    }
 
-    private WebElement waitForElementPresentById(String id, String error)
+    private WebElement waitForElementAndSendKeys(By by, String value, String error, long timeOutInSeconds)
     {
-       return waitForElementPresentById(id, error, 5);
-    }
-
-    private WebElement waitForElementPresentByIdAndClick(String id, String error, long timeOutInSeconds)
-    {
-        WebElement element = waitForElementPresentById(id, error, timeOutInSeconds);
-        element.click();
-        return element;
-    }
-
-    private WebElement waitForElementByIdAndSendKeys(String id, String value, String error, long timeOutInSeconds)
-    {
-        WebElement element = waitForElementPresentById(id, error, timeOutInSeconds);
+        WebElement element = waitForElementPresent(by, error, timeOutInSeconds);
         element.sendKeys(value);
         return element;
     }
