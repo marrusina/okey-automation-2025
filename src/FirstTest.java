@@ -113,7 +113,7 @@ public class FirstTest
  //   }
 
     @Test
-    public void swipeTest() {
+    public void swipeTest() throws InterruptedException {
         WebElement elementPermission = waitForElementPresentAndClick(
                 By.id("com.android.permissioncontroller:id/permission_deny_button"),
                 "cannot find permission deny button", 10);
@@ -155,10 +155,6 @@ public class FirstTest
                         By.xpath("//android.widget.TextView[@resource-id=\"ru.reksoft.okey:id/name\" and @text=\"Кашка без молока ФрутоНяня гречневая ...\"]"),
                 "Cannot find porridge",
                 50);
-//        WebElement elementPorridge = waitForElementPresent(
-//                By.xpath("//android.widget.TextView[@resource-id=\"ru.reksoft.okey:id/name\" and @text=\"Кашка без молока ФрутоНяня гречневая быстрорастворимая обогащ витаминами и мин веществами с 4мес 200г\"]"),
-//                "Cannot find bread",
-//                50);
         WebElement elementAddToCart = waitForElementPresentAndClick(
                 By.id("ru.reksoft.okey:id/add"),
                 "Cannot add product to cart",
@@ -169,6 +165,18 @@ public class FirstTest
         waitForElementPresent(
                 By.id("ru.reksoft.okey:id/name"),
                 "No product in cart",
+                20);
+        WebElement elementChQty = waitForElementPresentAndClick(
+                By.id("ru.reksoft.okey:id/itemQuantity"),
+                "Cannot click to change quantity",
+                10);
+        WebElement elementTwoPcs = waitForElementPresentAndClick(
+                By.xpath("//*[@text='2 pcs']"),
+                "Cannot choose 2 pcs",
+                10);
+        WebElement elementQuantity = waitForElementPresent(
+                By.xpath("//android.widget.TextView[@resource-id=\"ru.reksoft.okey:id/itemQuantity\" and @text=\"2 pcs\"]"),
+                "cannot find quantity",
                 10);
         swipeLeft(
                 By.id("ru.reksoft.okey:id/name"),
@@ -178,7 +186,6 @@ public class FirstTest
                 By.xpath("//android.widget.LinearLayout[@resource-id=\"ru.reksoft.okey:id/bottom_wrapper\"]/android.widget.ImageButton[2]"),
                 "Cannot delete product in cart",
                 15);
-
 
     }
 
@@ -259,16 +266,15 @@ public class FirstTest
 
     }
 
-    protected void swipeLeft(By by, String error)
-    {
+    protected void swipeLeft(By by, String error) throws InterruptedException {
         WebElement element = waitForElementPresent(by, error,10);
         int left_x = element.getLocation().getX();
         int right_x = left_x + element.getSize().getWidth();
         int upper_y = element.getLocation().getY();
         int lower_y = upper_y + element.getSize().getHeight();
-        int middle_y = (upper_y + lower_y)/4;
+        int middle_y = (upper_y + lower_y)/2;
         TouchAction action = new TouchAction(driver);
-        action.press(right_x, middle_y).waitAction(150).moveTo(left_x,middle_y).release().perform();
+        action.press(right_x, middle_y).waitAction(150).moveTo(left_x,middle_y).release().perform().waitAction(900);
     }
 
 
