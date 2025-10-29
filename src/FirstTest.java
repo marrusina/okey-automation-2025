@@ -1,18 +1,15 @@
-import com.google.common.collect.ImmutableMap;
-import io.appium.java_client.TouchAction;
 import lib.CoreTestCase;
 import lib.ui.MainPageObject;
+import lib.ui.SearchPageObject;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class FirstTest extends CoreTestCase
 {
     private MainPageObject MainPageObject;
+    public SearchPageObject SearchPageObject;
 
     @Override
     protected void setUp() throws Exception {
@@ -23,21 +20,16 @@ public class FirstTest extends CoreTestCase
     @Test
     public void testFirst()
     {
-        WebElement elementPermission = MainPageObject.waitForElementPresentAndClick(
-                By.id("com.android.permissioncontroller:id/permission_deny_button"),
-                "cannot find permission deny button", 10);
-        WebElement elementLocationCancel = MainPageObject.waitForElementPresentAndClick(
-                By.xpath("//*[contains(@text,'CANCEL')]"),
-                "no cancel button",10);
-        WebElement elementChooseCity = MainPageObject.waitForElementPresentAndClick(
-                By.xpath("//android.widget.TextView[@text=\"Санкт-Петербург\"]"),
-                "cannot find city button", 10);
-        WebElement elementNextButton = MainPageObject.waitForElementPresentAndClick(
-                By.id("ru.reksoft.okey:id/next"),
-                "Cannot find button Next", 10);
-        WebElement elementSkip = MainPageObject.waitForElementPresentAndClick(
-                By.id("ru.reksoft.okey:id/skip"),
-                "Cannot find button SKIP", 10);
+        SearchPageObject SearchPageObject = new SearchPageObject(driver);
+        SearchPageObject.accessToDeviceLocation(By.id(SearchPageObject.DEVICE_LOCATION_DENY_BUTTON),
+                "Cannot click location deny button", 10);
+        SearchPageObject.accessToGeoPosition(By.xpath(SearchPageObject.GEOPOSITION_ACESS_BUTTON),
+                "Cannot click deny button for geoposition",
+                10);
+        SearchPageObject.choosecity(By.xpath(SearchPageObject.CHOOSE_SAINT_PETERSBURG_BUTTON),
+                "Cannot choose Saint-Petersburg", 10);
+        SearchPageObject.clickNextAfterChooseCity();
+        SearchPageObject.skipChooseAddress();
         WebElement elementNotificationAllow = MainPageObject.waitForElementPresentAndClick(
                 By.xpath("//*[contains(@text,'ALLOW')]"),
                 "Cannot find button Allow notification", 10);
