@@ -1,7 +1,6 @@
 import org.junit.Test;
 
-public class MainTest extends CoreTest
-{
+public class MainTest {
     MathHelper Math = new MathHelper();
     @Test
     public void MyFirstTest() {
