@@ -11,6 +11,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class MainPageObject {
     protected AppiumDriver driver;
+    public static final String
+        BUTTON_BACK = "//android.widget.ImageButton[@content-desc=\"Navigate up\"]";
 
     public MainPageObject(AppiumDriver driver)
     {
@@ -102,6 +104,12 @@ public class MainPageObject {
         int middle_y = (upper_y + lower_y)/2;
         TouchAction action = new TouchAction(driver);
         action.press(right_x, middle_y).waitAction(150).moveTo(left_x,middle_y).release().perform().waitAction(900);
+    }
+
+    public void clickBackButton()
+    {
+        this.waitForElementPresentAndClick(By.xpath(BUTTON_BACK),
+                "Cannot click button Back", 10);
     }
 
 }

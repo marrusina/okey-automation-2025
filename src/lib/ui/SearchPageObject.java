@@ -1,17 +1,25 @@
 package lib.ui;
 
 import io.appium.java_client.AppiumDriver;
+import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 
 public class SearchPageObject extends MainPageObject
 {
     public static final String
-        DEVICE_LOCATION_DENY_BUTTON = "com.android.permissioncontroller:id/permission_deny_button",
-        GEOPOSITION_ACESS_BUTTON = "//*[contains(@text,'CANCEL')]",
-        CHOOSE_SAINT_PETERSBURG_BUTTON = "//android.widget.TextView[@text=\"Санкт-Петербург\"]",
-        NEXT_AFTER_CITY_BUTTON = "ru.reksoft.okey:id/next",
-        SKIP_CHOOSING_ADRESS = "ru.reksoft.okey:id/skip";
+        NAVIGATION_CATALOG_BUTTON ="(//android.widget.ImageView[@resource-id=\"ru.reksoft.okey:id/navigation_bar_item_icon_view\"])[2]",
+        ALL_CATALOG_SCREEN_NAME = "(//android.widget.TextView[@text=\"Catalogue\"])[1]",
+        CHECK_SEARCH_STRING = "//*[contains(@text,'Search')]",
+        SEARCH_FIELD = "ru.reksoft.okey:id/search_field",
+        PRODUCT_BREAD = "//*[@resource-id='ru.reksoft.okey:id/items']//*[@text='Хлеб Английский диетический в нар.400г Каравай']",
+        NAVIGATION_PANEL_MAIN = "(//android.widget.ImageView[@resource-id=\"ru.reksoft.okey:id/navigation_bar_item_icon_view\"])[1]",
+        DELIVERY_BLOCK_MAIN_SCREEN = "ru.reksoft.okey:id/book_delivery",
+        PORRIDGE_FRUTO_NYANYA = "//android.widget.TextView[@resource-id=\"ru.reksoft.okey:id/name\" and @text=\"Кашка без молока ФрутоНяня гречневая ...\"]",
+        ADD_TO_CART_BUTTON_BIG_PRODUCT_CARD = "ru.reksoft.okey:id/add",
+        NAVIGATION_PANEL_CART = "(//android.widget.ImageView[@resource-id=\"ru.reksoft.okey:id/navigation_bar_item_icon_view\"])[4]";
+
 
 
     public SearchPageObject(AppiumDriver driver)
@@ -19,33 +27,74 @@ public class SearchPageObject extends MainPageObject
         super(driver);
     }
 
-    public void accessToDeviceLocation(By by, String error, int time)
+    public void clickAddToCart()
     {
-        this.waitForElementPresentAndClick(by,error,time);
+        this.waitForElementPresentAndClick(By.id(ADD_TO_CART_BUTTON_BIG_PRODUCT_CARD),
+                "Cannot add product to cart from big product cart", 10);
     }
 
-    public void accessToGeoPosition(By by, String error, int time)
+    public void clickCatalogButtonNavigationPanel()
     {
-        this.waitForElementPresentAndClick(by,error,time);
-    }
-
-    public void choosecity(By by, String error, int time)
-    {
-        this.waitForElementPresentAndClick(by,error,time);
-    }
-
-    public void clickNextAfterChooseCity()
-    {
-        this.waitForElementPresentAndClick(By.id(NEXT_AFTER_CITY_BUTTON),
-                "Cannot click Next button after choosing city",
+        this.waitForElementPresentAndClick(By.id(NAVIGATION_CATALOG_BUTTON),
+                "Cannot click Catalog button",
                 10);
+        this.waitForElementPresent(By.xpath(ALL_CATALOG_SCREEN_NAME),
+                "cannot find Catalogue", 30);
     }
 
-    public void skipChooseAddress()
+    public void clickCartButtonNavigationPanel()
     {
-        this.waitForElementPresentAndClick(By.id(SKIP_CHOOSING_ADRESS),
-                "Cannot click Skip for choosing address",
-                10);
+        this.waitForElementPresentAndClick(By.xpath(NAVIGATION_PANEL_CART),
+                "Cannot click navigation panel cart button", 10);
+    }
+
+    public void clickSearchString()
+    {
+        this.waitForElementPresentAndClick(By.xpath(CHECK_SEARCH_STRING),
+                "no field Search", 20);
+    }
+
+    public void searchSendKeys(By by, String value, String error, long timeOutInSeconds)
+    {
+        this.waitForElementAndSendKeys(by, value, error, timeOutInSeconds);
+    }
+
+    public void productSmallVision(By by, String error, long timeOutInSeconds, String expected)
+    {
+        WebElement element = this.waitForElementPresent(by, error, timeOutInSeconds);
+        String result = element.getAttribute("text");
+        Assert.assertEquals(
+                        "Text is wrong",
+                expected,
+                result
+        );
+    }
+
+    public void navigationPanelMainButton()
+    {
+        this.waitForElementPresentAndClick(By.xpath(NAVIGATION_PANEL_MAIN),
+                "Cannot click Main in navigation panel", 10);
+    }
+
+    public void productSmallNotVision(By by, String error, long timeOutInSeconds)
+    {
+        this.waitForElementNotPresent(by, error, timeOutInSeconds);
+    }
+
+    public void searchClearField(By by, String error, long timeOutInSeconds)
+    {
+        this.waitForElementAndClear(by, error, timeOutInSeconds);
+    }
+
+    public void openProductCard(By by, String error, long timeOutInSeconds)
+    {
+        this.waitForElementPresentAndClick(by, error, timeOutInSeconds);
+    }
+
+    public void bookDeliveryBlock()
+    {
+        this.waitForElementPresent(By.id(DELIVERY_BLOCK_MAIN_SCREEN),
+                "Cannot find block delivery on main screen", 10);
     }
 
 

@@ -1,7 +1,7 @@
 import lib.CoreTestCase;
 import lib.ui.MainPageObject;
 import lib.ui.SearchPageObject;
-import org.junit.Assert;
+import lib.ui.WelcomePageObject;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -21,114 +21,75 @@ public class FirstTest extends CoreTestCase
     public void testFirst()
     {
         SearchPageObject SearchPageObject = new SearchPageObject(driver);
-        SearchPageObject.accessToDeviceLocation(By.id(SearchPageObject.DEVICE_LOCATION_DENY_BUTTON),
+        WelcomePageObject WelcomePageObject = new WelcomePageObject(driver);
+        WelcomePageObject.accessToDeviceLocation(By.id(WelcomePageObject.DEVICE_LOCATION_DENY_BUTTON),
                 "Cannot click location deny button", 10);
-        SearchPageObject.accessToGeoPosition(By.xpath(SearchPageObject.GEOPOSITION_ACESS_BUTTON),
+        WelcomePageObject.accessToGeoPosition(By.xpath(WelcomePageObject.GEOPOSITION_ACESS_BUTTON),
                 "Cannot click deny button for geoposition",
                 10);
-        SearchPageObject.choosecity(By.xpath(SearchPageObject.CHOOSE_SAINT_PETERSBURG_BUTTON),
+        WelcomePageObject.chooseCity(By.xpath(WelcomePageObject.CHOOSE_SAINT_PETERSBURG_BUTTON),
                 "Cannot choose Saint-Petersburg", 10);
-        SearchPageObject.clickNextAfterChooseCity();
-        SearchPageObject.skipChooseAddress();
-        WebElement elementNotificationAllow = MainPageObject.waitForElementPresentAndClick(
-                By.xpath("//*[contains(@text,'ALLOW')]"),
-                "Cannot find button Allow notification", 10);
-
-        WebElement elementCatalog = MainPageObject.waitForElementPresentAndClick(
-                By.xpath("(//android.widget.ImageView[@resource-id=\"ru.reksoft.okey:id/navigation_bar_item_icon_view\"])[2]"),
-                "cannot find catalog button", 10);
-        MainPageObject.waitForElementPresent(By.xpath("(//android.widget.TextView[@text=\"Catalogue\"])[1]"),
-            "cannot find Catalogue", 30);
+        WelcomePageObject.clickNextAfterChooseCity();
+        WelcomePageObject.skipChooseAddress();
+        //WelcomePageObject.chooseOnlineShop(By.xpath(WelcomePageObject.ONLINE_SHOP_BUTTON),
+        //        "Cannot find online shop button",
+        //        20);
+        WelcomePageObject.chooseNotificationButton(By.xpath(WelcomePageObject.NOTIFICATION_ALLOW_BUTTON),
+                "Cannot find button Allow notification",
+                10);
+        SearchPageObject.clickCatalogButtonNavigationPanel();
         MainPageObject.swipeUpAndFindElement(
                By.xpath("//*[@text='Books and stationery']\"]"),
                "No such element after swipe",
                 10);
         MainPageObject.swipeUpQuick();
-        WebElement elementSearch = MainPageObject.waitForElementPresentAndClick(
-                By.xpath("//*[contains(@text,'Search')]"),
-                "no field Search", 20);
-        WebElement elementSearchSendKeys = MainPageObject.waitForElementAndSendKeys(
-                By.id("ru.reksoft.okey:id/search_field"),
+        SearchPageObject.clickSearchString();
+        SearchPageObject.searchSendKeys(By.id(SearchPageObject.SEARCH_FIELD),
                 "хлеб", "cannot find search field and send keys", 10);
         MainPageObject.sendEnter();
-        MainPageObject.waitForElementPresent(
-                By.xpath("//*[@resource-id='ru.reksoft.okey:id/items']//*[@text='Хлеб Английский диетический в нар.400г Каравай']"),
-       "Cannot find bread", 50);
-
-        MainPageObject.waitForElementAndClear(By.id(
-                "ru.reksoft.okey:id/search_field"),
+        SearchPageObject.productSmallVision(By.xpath(SearchPageObject.PRODUCT_BREAD),
+                "Cannot find product card of bread", 30, "Хлеб Английский диетический в нар.400г Каравай");
+        SearchPageObject.searchClearField(By.id(SearchPageObject.SEARCH_FIELD),
                 "cannot clear search field", 10);
-        WebElement elementBack = MainPageObject.waitForElementPresentAndClick(
-                By.xpath("//android.widget.ImageButton[@content-desc=\"Navigate up\"]"),
-                "cannot find back and click",
-                10);
-        MainPageObject.waitForElementNotPresent(
-                By.xpath("//*[@resource-id='ru.reksoft.okey:id/items']//*[@text='Хлеб Английский диетический в нар.400г Каравай']"),
-                "Still seen bread", 30);
-        MainPageObject.waitForElementPresentAndClick(
-                By.xpath("//*[@resource-id='ru.reksoft.okey:id/items']//*[@text='Хлеб Английский диетический в нар.400г Каравай']"),
-                "Cannot find bread", 50);
-        WebElement elementBread = MainPageObject.waitForElementPresent(
-                        By.xpath("//*[@resource-id='ru.reksoft.okey:id/items']//*[@text='Хлеб Английский диетический в нар.400г Каравай']"),
-                "Cannot find bread", 50);
-        String bread = elementBread.getAttribute("text");
-        Assert.assertEquals(
-                "Text for bread is wrong",
-                "Хлеб Английский диетический в нар.400г Каравай",
-                bread
-        );
+        MainPageObject.clickBackButton();
+        SearchPageObject.productSmallNotVision(By.xpath(SearchPageObject.PRODUCT_BREAD),
+                "Bread is still seen", 30);
+        SearchPageObject.openProductCard(By.xpath(SearchPageObject.PRODUCT_BREAD),
+                "Cannot open product card of bread", 30);
+        SearchPageObject.productSmallVision(By.xpath(SearchPageObject.PRODUCT_BREAD),
+                "Cannot find product card of bread", 30,"Хлеб Английский диетический в нар.400г Каравай");
+
     }
 
     @Test
     public void testSwipe() throws InterruptedException {
-        WebElement elementPermission = MainPageObject.waitForElementPresentAndClick(
-                By.id("com.android.permissioncontroller:id/permission_deny_button"),
-                "cannot find permission deny button", 10);
-        WebElement elementLocationCancel = MainPageObject.waitForElementPresentAndClick(
-                By.xpath("//*[contains(@text,'CANCEL')]"),
-                "no cancel button", 10);
-        WebElement elementChooseCity = MainPageObject.waitForElementPresentAndClick(
-                By.xpath("//android.widget.TextView[@text=\"Санкт-Петербург\"]"),
-                "cannot find city button", 10);
-        WebElement elementNextButton = MainPageObject.waitForElementPresentAndClick(
-                By.id("ru.reksoft.okey:id/next"),
-                "Cannot find button Next", 10);
-        WebElement elementOnlineShop = MainPageObject.waitForElementPresentAndClick(
-                By.xpath("//android.widget.FrameLayout[@resource-id=\"ru.reksoft.okey:id/online\"]/android.view.ViewGroup"),
+        SearchPageObject SearchPageObject = new SearchPageObject(driver);
+        WelcomePageObject WelcomePageObject = new WelcomePageObject(driver);
+        WelcomePageObject.accessToDeviceLocation(By.id(WelcomePageObject.DEVICE_LOCATION_DENY_BUTTON),
+                "Cannot click location deny button", 10);
+        WelcomePageObject.accessToGeoPosition(By.xpath(WelcomePageObject.GEOPOSITION_ACESS_BUTTON),
+                "Cannot click deny button for geoposition",
+                10);
+        WelcomePageObject.chooseCity(By.xpath(WelcomePageObject.CHOOSE_SAINT_PETERSBURG_BUTTON),
+                "Cannot choose Saint-Petersburg", 10);
+        WelcomePageObject.clickNextAfterChooseCity();
+        WelcomePageObject.chooseOnlineShop(By.xpath(WelcomePageObject.ONLINE_SHOP_BUTTON),
                 "Cannot find online shop button",
                 20);
-        WebElement elementSkip = MainPageObject.waitForElementPresentAndClick(
-                By.id("ru.reksoft.okey:id/skip"),
-                "Cannot find button SKIP", 10);
-        WebElement elementNotificationAllow = MainPageObject.waitForElementPresentAndClick(
-                By.xpath("//*[contains(@text,'ALLOW')]"),
+        WelcomePageObject.skipChooseAddress();
+        WelcomePageObject.chooseNotificationButton(By.xpath(WelcomePageObject.NOTIFICATION_ALLOW_BUTTON),
                 "Cannot find button Allow notification", 10);
-        WebElement elementStoriesToClose = MainPageObject.waitForElementPresentAndClick(
-                By.id("ru.reksoft.okey:id/ias_close_button"),
-                "Cannot close Stories",
-                10);
-        WebElement elementCatalog = MainPageObject.waitForElementPresentAndClick(
-                By.xpath("(//android.widget.ImageView[@resource-id=\"ru.reksoft.okey:id/navigation_bar_item_icon_view\"])[1]"),
-                "cannot find main button", 10);
-        MainPageObject.waitForElementPresent(
-                By.id("ru.reksoft.okey:id/book_delivery"),
-                "it's not the main screen", 30);
+        WelcomePageObject.closeStories();
+        SearchPageObject.navigationPanelMainButton();
+        SearchPageObject.bookDeliveryBlock();
         MainPageObject.swipeUpAndFindElement(
-                //By.xpath("//android.widget.TextView[@resource-id=\"ru.reksoft.okey:id/title\" and @text=\"Children\"]"),
-                By.xpath("//android.widget.TextView[@resource-id=\"ru.reksoft.okey:id/name\" and @text=\"Кашка без молока ФрутоНяня гречневая ...\"]"),
+                By.xpath(SearchPageObject.PORRIDGE_FRUTO_NYANYA),
                 "No such element after swipe",
                 20);
-        MainPageObject.waitForElementPresentAndClick(
-                        By.xpath("//android.widget.TextView[@resource-id=\"ru.reksoft.okey:id/name\" and @text=\"Кашка без молока ФрутоНяня гречневая ...\"]"),
-                "Cannot find porridge",
-                50);
-        WebElement elementAddToCart = MainPageObject.waitForElementPresentAndClick(
-                By.id("ru.reksoft.okey:id/add"),
-                "Cannot add product to cart",
-                10);
-        WebElement elementCart = MainPageObject.waitForElementPresentAndClick(
-                By.xpath("(//android.widget.ImageView[@resource-id=\"ru.reksoft.okey:id/navigation_bar_item_icon_view\"])[4]"),
-                "cannot find cart button", 10);
+        SearchPageObject.openProductCard(By.xpath(SearchPageObject.PORRIDGE_FRUTO_NYANYA),
+                "Cannot open product card of porridge", 30);
+        SearchPageObject.clickAddToCart();
+        SearchPageObject.clickCartButtonNavigationPanel();
         MainPageObject.waitForElementPresent(
                 By.id("ru.reksoft.okey:id/name"),
                 "No product in cart",
