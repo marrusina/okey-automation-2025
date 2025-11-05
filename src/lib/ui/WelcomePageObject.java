@@ -17,14 +17,21 @@ public class WelcomePageObject extends MainPageObject {
     {
         super(driver);
     }
-    public void accessToDeviceLocation(By by, String error, int time)
+//    public void accessToDeviceLocation(By by, String error, int time)
+//    {
+//        this.waitForElementPresentAndClick(by,error,time);
+//    }
+    public void accessToDeviceLocationDenyButton()
     {
-        this.waitForElementPresentAndClick(by,error,time);
+                this.waitForElementPresentAndClick(By.id(WelcomePageObject.DEVICE_LOCATION_DENY_BUTTON),
+                        "Cannot click location deny button", 10);
     }
 
-    public void accessToGeoPosition(By by, String error, int time)
+    public void accessToGeoPositionDenyButton()
     {
-        this.waitForElementPresentAndClick(by,error,time);
+        this.waitForElementPresentAndClick(By.xpath(WelcomePageObject.GEOPOSITION_ACESS_BUTTON),
+                "Cannot click deny button for geoposition",
+                10);
     }
 
     public void chooseCity(By by, String error, int time)
@@ -46,14 +53,18 @@ public class WelcomePageObject extends MainPageObject {
                 10);
     }
 
-    public void chooseOnlineShop(By by, String error, int time)
+    public void chooseOnlineShop()
     {
-        this.waitForElementPresentAndClick(by,error,time);
+        this.waitForElementPresentAndClick(By.xpath(WelcomePageObject.ONLINE_SHOP_BUTTON),
+                "Cannot find online shop button",
+                20);
     }
 
-    public void chooseNotificationButton(By by, String error, int time)
+    public void chooseNotificationAllowButton()
     {
-        this.waitForElementPresentAndClick(by,error,time);
+        this.waitForElementPresentAndClick(By.xpath(WelcomePageObject.NOTIFICATION_ALLOW_BUTTON),
+                "Cannot find button Allow notification",
+                10);
     }
 
     public void closeStories()

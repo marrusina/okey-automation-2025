@@ -16,21 +16,13 @@ public class SearchPageObject extends MainPageObject
         PRODUCT_BREAD = "//*[@resource-id='ru.reksoft.okey:id/items']//*[@text='Хлеб Английский диетический в нар.400г Каравай']",
         NAVIGATION_PANEL_MAIN = "(//android.widget.ImageView[@resource-id=\"ru.reksoft.okey:id/navigation_bar_item_icon_view\"])[1]",
         DELIVERY_BLOCK_MAIN_SCREEN = "ru.reksoft.okey:id/book_delivery",
-        PORRIDGE_FRUTO_NYANYA = "//android.widget.TextView[@resource-id=\"ru.reksoft.okey:id/name\" and @text=\"Кашка без молока ФрутоНяня гречневая ...\"]",
-        ADD_TO_CART_BUTTON_BIG_PRODUCT_CARD = "ru.reksoft.okey:id/add",
-        NAVIGATION_PANEL_CART = "(//android.widget.ImageView[@resource-id=\"ru.reksoft.okey:id/navigation_bar_item_icon_view\"])[4]";
+        PORRIDGE_FRUTO_NYANYA = "//android.widget.TextView[@resource-id=\"ru.reksoft.okey:id/name\" and @text=\"Кашка без молока ФрутоНяня гречневая ...\"]";
 
 
 
     public SearchPageObject(AppiumDriver driver)
     {
         super(driver);
-    }
-
-    public void clickAddToCart()
-    {
-        this.waitForElementPresentAndClick(By.id(ADD_TO_CART_BUTTON_BIG_PRODUCT_CARD),
-                "Cannot add product to cart from big product cart", 10);
     }
 
     public void clickCatalogButtonNavigationPanel()
@@ -40,12 +32,6 @@ public class SearchPageObject extends MainPageObject
                 10);
         this.waitForElementPresent(By.xpath(ALL_CATALOG_SCREEN_NAME),
                 "cannot find Catalogue", 30);
-    }
-
-    public void clickCartButtonNavigationPanel()
-    {
-        this.waitForElementPresentAndClick(By.xpath(NAVIGATION_PANEL_CART),
-                "Cannot click navigation panel cart button", 10);
     }
 
     public void clickSearchString()

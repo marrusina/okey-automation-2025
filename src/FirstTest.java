@@ -1,4 +1,5 @@
 import lib.CoreTestCase;
+import lib.ui.CartPageObject;
 import lib.ui.MainPageObject;
 import lib.ui.SearchPageObject;
 import lib.ui.WelcomePageObject;
@@ -22,21 +23,15 @@ public class FirstTest extends CoreTestCase
     {
         SearchPageObject SearchPageObject = new SearchPageObject(driver);
         WelcomePageObject WelcomePageObject = new WelcomePageObject(driver);
-        WelcomePageObject.accessToDeviceLocation(By.id(WelcomePageObject.DEVICE_LOCATION_DENY_BUTTON),
-                "Cannot click location deny button", 10);
-        WelcomePageObject.accessToGeoPosition(By.xpath(WelcomePageObject.GEOPOSITION_ACESS_BUTTON),
-                "Cannot click deny button for geoposition",
-                10);
+        CartPageObject CartPageObject = new CartPageObject(driver);
+        WelcomePageObject.accessToDeviceLocationDenyButton();
+        WelcomePageObject.accessToGeoPositionDenyButton();
         WelcomePageObject.chooseCity(By.xpath(WelcomePageObject.CHOOSE_SAINT_PETERSBURG_BUTTON),
                 "Cannot choose Saint-Petersburg", 10);
         WelcomePageObject.clickNextAfterChooseCity();
         WelcomePageObject.skipChooseAddress();
-        //WelcomePageObject.chooseOnlineShop(By.xpath(WelcomePageObject.ONLINE_SHOP_BUTTON),
-        //        "Cannot find online shop button",
-        //        20);
-        WelcomePageObject.chooseNotificationButton(By.xpath(WelcomePageObject.NOTIFICATION_ALLOW_BUTTON),
-                "Cannot find button Allow notification",
-                10);
+        WelcomePageObject.chooseOnlineShop();
+        WelcomePageObject.chooseNotificationAllowButton();
         SearchPageObject.clickCatalogButtonNavigationPanel();
         MainPageObject.swipeUpAndFindElement(
                By.xpath("//*[@text='Books and stationery']\"]"),
@@ -65,20 +60,15 @@ public class FirstTest extends CoreTestCase
     public void testSwipe() throws InterruptedException {
         SearchPageObject SearchPageObject = new SearchPageObject(driver);
         WelcomePageObject WelcomePageObject = new WelcomePageObject(driver);
-        WelcomePageObject.accessToDeviceLocation(By.id(WelcomePageObject.DEVICE_LOCATION_DENY_BUTTON),
-                "Cannot click location deny button", 10);
-        WelcomePageObject.accessToGeoPosition(By.xpath(WelcomePageObject.GEOPOSITION_ACESS_BUTTON),
-                "Cannot click deny button for geoposition",
-                10);
+        CartPageObject CartPageObject = new CartPageObject(driver);
+        WelcomePageObject.accessToDeviceLocationDenyButton();
+        WelcomePageObject.accessToGeoPositionDenyButton();
         WelcomePageObject.chooseCity(By.xpath(WelcomePageObject.CHOOSE_SAINT_PETERSBURG_BUTTON),
                 "Cannot choose Saint-Petersburg", 10);
         WelcomePageObject.clickNextAfterChooseCity();
-        WelcomePageObject.chooseOnlineShop(By.xpath(WelcomePageObject.ONLINE_SHOP_BUTTON),
-                "Cannot find online shop button",
-                20);
+        WelcomePageObject.chooseOnlineShop();
         WelcomePageObject.skipChooseAddress();
-        WelcomePageObject.chooseNotificationButton(By.xpath(WelcomePageObject.NOTIFICATION_ALLOW_BUTTON),
-                "Cannot find button Allow notification", 10);
+        WelcomePageObject.chooseNotificationAllowButton();
         WelcomePageObject.closeStories();
         SearchPageObject.navigationPanelMainButton();
         SearchPageObject.bookDeliveryBlock();
@@ -88,16 +78,10 @@ public class FirstTest extends CoreTestCase
                 20);
         SearchPageObject.openProductCard(By.xpath(SearchPageObject.PORRIDGE_FRUTO_NYANYA),
                 "Cannot open product card of porridge", 30);
-        SearchPageObject.clickAddToCart();
-        SearchPageObject.clickCartButtonNavigationPanel();
-        MainPageObject.waitForElementPresent(
-                By.id("ru.reksoft.okey:id/name"),
-                "No product in cart",
-                20);
-        WebElement elementChQty = MainPageObject.waitForElementPresentAndClick(
-                By.id("ru.reksoft.okey:id/itemQuantity"),
-                "Cannot click to change quantity",
-                10);
+        CartPageObject.clickAddToCartFromBigCart();
+        CartPageObject.clickCartButtonNavigationPanel();
+        CartPageObject.checkForProductInCartWhenItsAlone();
+        CartPageObject.clickChQtyInCartWhenProductIsAlone();
         WebElement elementTwoPcs = MainPageObject.waitForElementPresentAndClick(
                 By.xpath("//*[@text='2 pcs']"),
                 "Cannot choose 2 pcs",
