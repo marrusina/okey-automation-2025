@@ -8,7 +8,7 @@ public class IOSWelcomePageObject extends WelcomePageObject
     static
     {
         DEVICE_LOCATION_DENY_BUTTON = "id:com.android.permissioncontroller:id/permission_deny_button";
-        GEOPOSITION_ACESS_BUTTON = "xpath://*[contains(@text,'CANCEL')]";
+        GEOPOSITION_ACESS_DENY_BUTTON  = "xpath://*[contains(@text,'CANCEL')]";
         CHOOSE_SAINT_PETERSBURG_BUTTON = "xpath://android.widget.TextView[@text=\"Санкт-Петербург\"]";
         NEXT_AFTER_CITY_BUTTON = "id:ru.reksoft.okey:id/next";
         SKIP_CHOOSING_ADRESS = "id:ru.reksoft.okey:id/skip";

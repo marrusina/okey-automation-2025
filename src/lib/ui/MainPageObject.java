@@ -10,6 +10,8 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 
 abstract public class MainPageObject {
@@ -65,6 +67,25 @@ abstract public class MainPageObject {
         return wait.until(ExpectedConditions.presenceOfElementLocated(by));
     }
 
+    public WebElement waitForElementPresentWithList(List<String> locators, String error, long timeOutInSeconds)
+    {   List<By> byLocators = new ArrayList<>();
+        for (String locatorString : locators) {
+            byLocators.add(this.getLocatorString(locatorString));
+        }
+       //Создает экземпляр класса WebDriverWait
+        WebDriverWait wait = new WebDriverWait(driver,timeOutInSeconds);
+        wait.withMessage(error + "\n");
+        return wait.until(d -> {
+            for (By by : byLocators) {
+                List<WebElement> elements = d.findElements(by);
+                if (!elements.isEmpty()) {
+                    return elements.get(0); // Возвращаем первый найденный элемент
+                }
+            }
+            return null; // Если ни один не найден, продолжаем ждать
+        });
+    }
+
     //дефолтное ожидание, что элемеент присутствует - время 5 сек
     public WebElement waitForElementPresent(String locator, String error)
     {
@@ -78,6 +99,22 @@ abstract public class MainPageObject {
         WebElement element = waitForElementPresent(locator, error, timeOutInSeconds);
         element.click();
         return element;
+    }
+
+    public boolean waitForElementPresentAndNotEnabled(String locator, String error, long timeOutInSeconds)
+    {
+        //Возврашает веб элемент из метода waitForElementPresent
+        WebElement element = waitForElementPresent(locator, error, timeOutInSeconds);
+        boolean enabled = element.isEnabled();
+        return !enabled;
+    }
+
+    public boolean waitForElementPresentAndEnabled(String locator, String error, long timeOutInSeconds)
+    {
+        //Возврашает веб элемент из метода waitForElementPresent
+        WebElement element = waitForElementPresent(locator, error, timeOutInSeconds);
+        boolean enabled = element.isEnabled();
+        return enabled;
     }
 
     //ожидание, что элемент присутствует и ввод строки
