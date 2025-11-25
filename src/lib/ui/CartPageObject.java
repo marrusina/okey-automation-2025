@@ -2,7 +2,7 @@ package lib.ui;
 
 import io.appium.java_client.AppiumDriver;
 
-abstract public class CartPageObject extends MainPageObject{
+abstract public class CartPageObject extends AllPageObject {
 
     public static String
         PRODUCT_NAME_IN_CART_ALONE_PRODUCT;

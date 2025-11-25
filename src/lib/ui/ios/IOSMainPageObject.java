@@ -1,6 +1,7 @@
 package lib.ui.ios;
 
 import io.appium.java_client.AppiumDriver;
+import lib.ui.AllPageObject;
 import lib.ui.MainPageObject;
 
 public class IOSMainPageObject extends MainPageObject {

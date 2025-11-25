@@ -15,7 +15,7 @@ public class AndroidWelcomePageObject extends WelcomePageObject
         NEXT_AFTER_CITY_BUTTON = "id:ru.reksoft.okey:id/next";
         SKIP_CHOOSING_ADRESS = "id:ru.reksoft.okey:id/skip";
         ONLINE_SHOP_BUTTON = "xpath://android.widget.FrameLayout[@resource-id=\"ru.reksoft.okey:id/online\"]/android.view.ViewGroup";
-        NOTIFICATION_ALLOW_BUTTON = "xpath://*[contains(@text,'ALLOW')]";
+        NOTIFICATION_ALLOW_BUTTON = "id:com.android.permissioncontroller:id/permission_allow_button";
         STORIES_CLOSE = "id:ru.reksoft.okey:id/ias_close_button";
         CITY_SCREEN_NAME = "xpath://*[contains(@text,'Выберите регион')]";
         CITY_SCREEN_SEARCH_ICON = "id:ru.reksoft.okey:id/search";
@@ -44,6 +44,7 @@ public class AndroidWelcomePageObject extends WelcomePageObject
         CITY_TOL = "xpath://android.widget.TextView[@text=\"Тольятти\"]";
         CITY_TUM = "xpath://android.widget.TextView[@text=\"Тюмень\"]";
         CITY_UFA = "xpath://android.widget.TextView[@text=\"Уфа\"]";
+        ABOUT_APPLICATION = "xpath://android.widget.TextView[@text=\"О приложении\"]";
     }
 
     public AndroidWelcomePageObject(AppiumDriver driver)

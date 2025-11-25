@@ -7,7 +7,7 @@ import lib.CoreTestCase;
 
 public class WelcomeTest extends CoreTestCase {
 
-    private MainPageObject MainPageObject;
+    private AllPageObject AllPageObject;
     private WelcomePageObject WelcomePageObject;
 
     @Override
@@ -39,6 +39,7 @@ public class WelcomeTest extends CoreTestCase {
 
     }
 
+    @Test
     public void testSearchInCitiesList()
     {
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
@@ -49,6 +50,36 @@ public class WelcomeTest extends CoreTestCase {
         WelcomePageObject.checkCityScreenNextButtonNotEnabled();
         SearchPageObject.searchSendKeys(WelcomePageObject.CITY_SCREEN_SEARCH_TEXT, "Красноярск","Cannot click search line on cities screen",10);
         WelcomePageObject.chooseCity(WelcomePageObject.CITY_KRASNOYARSK,"Cannot click RND", 10);
+
+    }
+    @Test
+    public void testCheckSettingsButtonInGEO()
+    {
+        SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
+        WelcomePageObject.accessToDeviceLocationDenyButton();
+        WelcomePageObject.accessToGeoPositionSettingsButton();
+        WelcomePageObject.checkApplicationSettings();
+
+    }
+
+    @Test
+    public void testCheckCityChoosen()
+    {
+        ProfilePageObject ProfilePageObject = ProfilePageObjectFactory.get(driver);
+        WelcomePageObject.accessToDeviceLocationDenyButton();
+        WelcomePageObject.accessToGeoPositionDenyButton();
+        WelcomePageObject.checkCityScreenName();
+        WelcomePageObject.checkCityScreenSearchIconAndText();
+        WelcomePageObject.checkCityScreenNextButtonNotEnabled();
+        WelcomePageObject.chooseCity(WelcomePageObject.CITY_SPB, "Cannot choose SPB", 10);
+        WelcomePageObject.clickNextAfterChooseCity();
+        WelcomePageObject.chooseOnlineShop();
+        WelcomePageObject.skipChooseAddress();
+        WelcomePageObject.chooseNotificationAllowButton();
+        WelcomePageObject.closeStories();
+        ProfilePageObject.clickProfileButtonNavigationPanel();
+        ProfilePageObject.swipeOnProfileScreenToSeeCityName();
+        ProfilePageObject.checkCityInProfileSpb();
 
     }
 

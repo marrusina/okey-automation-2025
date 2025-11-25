@@ -4,11 +4,10 @@ import lib.CoreTestCase;
 import lib.ui.*;
 import lib.ui.factories.*;
 import org.junit.Test;
-import org.openqa.selenium.By;
 
 public class FirstTest extends CoreTestCase
 {
-    private MainPageObject MainPageObject;
+    private AllPageObject MainPageObject;
     //public SearchPageObject SearchPageObject;
 
     @Override

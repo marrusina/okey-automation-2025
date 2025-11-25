@@ -2,7 +2,7 @@ package lib.ui;
 
 import io.appium.java_client.AppiumDriver;
 
-abstract public class SearchPageObject extends MainPageObject
+abstract public class SearchPageObject extends AllPageObject
 {
     public static String
             SEARCH_FIELD;

@@ -1,11 +1,10 @@
 package lib.ui;
 import io.appium.java_client.AppiumDriver;
-import org.openqa.selenium.WebElement;
 
 import java.util.Arrays;
 import java.util.List;
 
-abstract public class WelcomePageObject extends MainPageObject {
+abstract public class WelcomePageObject extends AllPageObject {
     public static String
     CHOOSE_SAINT_PETERSBURG_BUTTON, CITY_SPB, CITY_TUM, CITY_KRASNOYARSK, CITY_SCREEN_SEARCH_TEXT;
     protected static String
@@ -14,7 +13,7 @@ abstract public class WelcomePageObject extends MainPageObject {
     STORIES_CLOSE, CITY_SCREEN_NAME, CITY_SCREEN_SEARCH_ICON, CITY_SCREEN_BUTTON_NEXT, CITY_MOSCOW,
     CITY_ASTRAKH, CITY_VORONEZH, CITY_EKAT, CITY_IVANOVO, CITY_IRKUTSK, CITY_KRASNODAR, CITY_LIPETSK,
     CITY_MURM, CITY_NN, CITY_NOVOSIB, CITY_NOVOCHER, CITY_OMSK, CITY_ORENB, CITY_RND, CITY_SCH, CITY_SURGUT, CITY_SKVK, CITY_TOL,
-    CITY_UFA;
+    CITY_UFA, ABOUT_APPLICATION;
 
     public WelcomePageObject(AppiumDriver driver)
     {
@@ -27,7 +26,7 @@ abstract public class WelcomePageObject extends MainPageObject {
     //Клик по кнопке Отказ в доступе к данным о геолокации устройства
     public void accessToDeviceLocationDenyButton()
     {
-                this.waitForElementPresentAndClick(DEVICE_LOCATION_DENY_BUTTON,
+        this.waitForElementPresentAndClick(DEVICE_LOCATION_DENY_BUTTON,
                         "Cannot click location deny button", 10);
     }
 
@@ -36,6 +35,11 @@ abstract public class WelcomePageObject extends MainPageObject {
         this.waitForElementPresentAndClick(GEOPOSITION_ACESS_DENY_BUTTON,
                 "Cannot click deny button for geoposition",
                 10);
+    }
+
+    public void accessToGeoPositionSettingsButton()
+    {
+        this.waitForElementPresentAndClick(GEOPOSITION_ACESS_SETTINGS_BUTTON, "Cannot click settings button for GEO", 10);
     }
 
     public void checkCityScreenName()
@@ -85,10 +89,9 @@ abstract public class WelcomePageObject extends MainPageObject {
         waitForElementPresentAndClick(WelcomePageObject.CITY_TUM, "Cannot click Tumen", 10);
     }
 
-    public void enterCityNameInCityScreen(String locator, String value, String error, long timeOutInSeconds)
+    public void checkApplicationSettings()
     {
-        WebElement element = waitForElementAndSendKeys(CITY_SCREEN_SEARCH_TEXT, "Красноярск","Cannot click search line on cities screen",10);
-
+        this.waitForElementPresent(ABOUT_APPLICATION, "Cannot see settings screen",10);
     }
 
     public void chooseCity(String locator, String error, int time)

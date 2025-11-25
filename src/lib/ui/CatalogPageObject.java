@@ -5,7 +5,7 @@ import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 
 
-abstract public class CatalogPageObject extends MainPageObject{
+abstract public class CatalogPageObject extends AllPageObject {
 
     public static String
             PORRIDGE_FRUTO_NYANYA,

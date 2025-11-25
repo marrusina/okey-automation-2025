@@ -2,11 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="748f3d28-94ad-45ff-8f2b-2cbe49a3b5b8" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/lib/ui/AllPageObject.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/ui/ProfilePageObject.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/ui/android/AndroidProfilePageObject.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/ui/factories/ProfilePageObjectFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/ui/ios/IOSProfilePageObject.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/tests/MainScreenTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/ui/CartPageObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/ui/CartPageObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/ui/CatalogPageObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/ui/CatalogPageObject.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/ui/MainPageObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/ui/MainPageObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/ui/SearchPageObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/ui/SearchPageObject.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/ui/WelcomePageObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/ui/WelcomePageObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/ui/android/AndroidMainPageObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/ui/android/AndroidMainPageObject.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/ui/android/AndroidWelcomePageObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/ui/android/AndroidWelcomePageObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/ui/ios/IOSWelcomePageObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/ui/ios/IOSWelcomePageObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/ui/factories/MainPageObjectFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/ui/factories/MainPageObjectFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/ui/ios/IOSMainPageObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/ui/ios/IOSMainPageObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/FirstTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/FirstTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/tests/WelcomeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/WelcomeTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -42,8 +54,8 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;shared-indexes&quot;
   }
 }</component>
-  <component name="RunManager" selected="JUnit.WelcomeTest.testSearchInCitiesList">
-    <configuration name="FirstTest.testSwipe" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.MainScreenTest.testMainScreenSearchBlock">
+    <configuration name="MainScreenTest.testMainScreenSearchBlock" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="JavaAppiumAutomation" />
       <extension name="coverage">
         <pattern>
@@ -52,8 +64,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="tests" />
-      <option name="MAIN_CLASS_NAME" value="tests.FirstTest" />
-      <option name="METHOD_NAME" value="testSwipe" />
+      <option name="MAIN_CLASS_NAME" value="tests.MainScreenTest" />
+      <option name="METHOD_NAME" value="testMainScreenSearchBlock" />
       <option name="TEST_OBJECT" value="method" />
       <envs>
         <env name="PLATFORM" value="android" />
@@ -62,7 +74,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="WelcomeTest.checkCityScreen" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="WelcomeTest.checkCityChoosen" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="JavaAppiumAutomation" />
       <extension name="coverage">
         <pattern>
@@ -72,13 +84,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="tests" />
       <option name="MAIN_CLASS_NAME" value="tests.WelcomeTest" />
-      <option name="METHOD_NAME" value="checkCityScreen" />
+      <option name="METHOD_NAME" value="checkCityChoosen" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="WelcomeTest.testCheckCitiesInListAreClickable" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="WelcomeTest.testCheckCityChoosen" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="JavaAppiumAutomation" />
       <extension name="coverage">
         <pattern>
@@ -88,7 +100,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="tests" />
       <option name="MAIN_CLASS_NAME" value="tests.WelcomeTest" />
-      <option name="METHOD_NAME" value="testCheckCitiesInListAreClickable" />
+      <option name="METHOD_NAME" value="testCheckCityChoosen" />
       <option name="TEST_OBJECT" value="method" />
       <envs>
         <env name="PLATFORM" value="android" />
@@ -97,7 +109,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="WelcomeTest.testCheckCityScreen" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="WelcomeTest.testCheckSettingsButtonInGEO" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="JavaAppiumAutomation" />
       <extension name="coverage">
         <pattern>
@@ -107,7 +119,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="tests" />
       <option name="MAIN_CLASS_NAME" value="tests.WelcomeTest" />
-      <option name="METHOD_NAME" value="testCheckCityScreen" />
+      <option name="METHOD_NAME" value="testCheckSettingsButtonInGEO" />
       <option name="TEST_OBJECT" value="method" />
       <envs>
         <env name="PLATFORM" value="android" />
@@ -136,19 +148,19 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="JUnit.MainScreenTest.testMainScreenSearchBlock" />
+      <item itemvalue="JUnit.WelcomeTest.checkCityChoosen" />
+      <item itemvalue="JUnit.WelcomeTest.testCheckCityChoosen" />
+      <item itemvalue="JUnit.WelcomeTest.testCheckSettingsButtonInGEO" />
       <item itemvalue="JUnit.WelcomeTest.testSearchInCitiesList" />
-      <item itemvalue="JUnit.WelcomeTest.testCheckCitiesInListAreClickable" />
-      <item itemvalue="JUnit.WelcomeTest.checkCityScreen" />
-      <item itemvalue="JUnit.WelcomeTest.testCheckCityScreen" />
-      <item itemvalue="JUnit.FirstTest.testSwipe" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.MainScreenTest.testMainScreenSearchBlock" />
+        <item itemvalue="JUnit.WelcomeTest.testCheckCityChoosen" />
+        <item itemvalue="JUnit.WelcomeTest.checkCityChoosen" />
+        <item itemvalue="JUnit.WelcomeTest.testCheckSettingsButtonInGEO" />
         <item itemvalue="JUnit.WelcomeTest.testSearchInCitiesList" />
-        <item itemvalue="JUnit.WelcomeTest.testCheckCitiesInListAreClickable" />
-        <item itemvalue="JUnit.WelcomeTest.testCheckCityScreen" />
-        <item itemvalue="JUnit.WelcomeTest.checkCityScreen" />
-        <item itemvalue="JUnit.FirstTest.testSwipe" />
       </list>
     </recent_temporary>
   </component>
